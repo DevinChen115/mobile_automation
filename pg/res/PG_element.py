@@ -1,4 +1,6 @@
-pkg = input("please input package name: ")
+import os
+
+pkg = os.getenv('PGPKG')
 # Package 相關
 Package={}
 Package['appPackage'] = pkg

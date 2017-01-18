@@ -1,6 +1,6 @@
 import time
 import os
-import subprocess
+import sys
 # from appium import webdriver
 from selenium.webdriver.common.by import By
 # from selenium.webdriver.remote.webelement import WebElement
@@ -10,19 +10,19 @@ from selenium.common.exceptions import TimeoutException
 
 
 def getDeviceStatus():
-    getadbState = subprocess.getoutput("adb get-state")
+    getadbState = osCommand("adb get-state")
     getadbStateA = getadbState.find("device")
     if getadbStateA is not -1:
         print("adb connection is available to use. getadbState = " + getadbState)
     else:
         print("adb connection is unavailable to use. getadbState = " + getadbState)
 
-    getPropManufacturer = subprocess.getoutput("adb shell getprop ro.product.manufacturer")
-    getPropModel = subprocess.getoutput("adb shell getprop ro.product.model")
-    getPropBrand = subprocess.getoutput("adb shell getprop ro.product.brand")
-    getPropAndroidversion = subprocess.getoutput("adb shell getprop ro.build.version.release")
-    getPropSDKversion = subprocess.getoutput("adb shell getprop ro.build.version.sdk")
-    getPropSerialNo = subprocess.getoutput("adb shell getprop ro.serialno")
+    getPropManufacturer = osCommand("adb shell getprop ro.product.manufacturer")
+    getPropModel = osCommand("adb shell getprop ro.product.model")
+    getPropBrand = osCommand("adb shell getprop ro.product.brand")
+    getPropAndroidversion = osCommand("adb shell getprop ro.build.version.release")
+    getPropSDKversion = osCommand("adb shell getprop ro.build.version.sdk")
+    getPropSerialNo = osCommand("adb shell getprop ro.serialno")
 
     Result = dict(
         Manufacturer=getPropManufacturer,
@@ -32,6 +32,15 @@ def getDeviceStatus():
         SDKversion=getPropSDKversion,
         SerialNo=getPropSerialNo)
     return Result
+
+def osCommand(cmd):
+    pyVesion = str(sys.version_info)
+    if pyVesion.startswith("2"):
+        import commands
+        return commands.getoutput(cmd)
+    else:
+        import subprocess
+        return subprocess.getoutput(cmd)
 
 
 class Util:
@@ -43,7 +52,7 @@ class Util:
             os.makedirs(self.screenshot_dir)
 
     def clearDate(self):
-        result = subprocess.getoutput('adb shell pm clear com.roidapp.photogrid')
+        result = osCommand('adb shell pm clear com.roidapp.photogrid')
         if 'Success' in result:
             return True
         else:
@@ -51,7 +60,7 @@ class Util:
             return False
 
     def launchPG(self):
-        subprocess.getoutput('adb shell am start -n com.roidapp.photogrid/.MainPage')
+        osCommand('adb shell am start -n com.roidapp.photogrid/.MainPage')
 
     def isEleClickable(self, rid):
         try:

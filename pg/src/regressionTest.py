@@ -45,7 +45,7 @@ class regression_test(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def test_FirstTimeLaunchNeedHaveLoginPage(self):
+    def test_PG_001_FirstTimeLaunchNeedHaveLoginPage(self):
         try:
             if(self.pgutil.clearDate()):
                 self.pgutil.launchPG()
@@ -57,7 +57,41 @@ class regression_test(unittest.TestCase):
             else:
                 raise
         except:
-            self.pgutil.screenshot("test_FirstTimeLaunchNeedHaveLoginPage")
+            self.pgutil.screenshot("test_PG_001_FirstTimeLaunchNeedHaveLoginPage")
+            self.assertTrue(False)
+
+    def test_PG_002_SecondTimeLaunchNeedHaveGuide(self):
+        try:
+            # second time launch
+            if(self.pgutil.clearDate()):
+                self.pgutil.launchPG()
+                if(self.pgutil.isEleClickable(el.LoginPage['skip'])):
+                    self.pgutil.closePG()
+                    self.pgutil.launchPG()
+                else:
+                    raise
+
+                # press back key then verify overlayout still display
+                self.driver.press_keycode(4); #Back Key
+                isHaveWording = self.pgutil.isEleClickable(el.AllTool['wording'])
+                isHaveArrow = self.pgutil.isEleClickable(el.AllTool['arrow_down'])
+                if((isHaveWording) and (isHaveArrow)):
+                    self.assertTrue(True,"點擊 Back key 後蒙層不應該不見")
+
+                # tap + then verify overlayout undisplay
+                self.pgutil.waitUntilAndGetElement("id",el.AllTool['tool'],"點擊+號").click()
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['tools_content']),"蒙層消失, 出現工具集")
+
+                # verify 拼接 and Twinkle and Camera
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['multi']),"工具集裡有拼接")
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['twinkle']),"工具集裡有Twinkle")
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['camera']),"工具集最近照片裡有相機")
+
+                # Tap x then verify tools layout undisplay
+                self.pgutil.waitUntilAndGetElement("id",el.AllTool['close'],"點擊 X ").click()
+                self.assertFalse(self.pgutil.isEleClickable(el.AllTool['tools_content']),"工具集取消")
+        except:
+            self.pgutil.screenshot("test_PG_002_SecondTimeLaunchNeedHaveGuide")
             self.assertTrue(False)
 
 

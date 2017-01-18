@@ -45,6 +45,7 @@ def osCommand(cmd):
 
 class Util:
     def __init__(self, mDevice, dir):
+        self.pkg = os.getenv('PGPKG')
         self.driver = mDevice
         # self.screenshot_count = 1
         self.screenshot_dir = dir
@@ -52,7 +53,7 @@ class Util:
             os.makedirs(self.screenshot_dir)
 
     def clearDate(self):
-        result = osCommand('adb shell pm clear com.roidapp.photogrid')
+        result = osCommand('adb shell pm clear '+ self.pkg)
         if 'Success' in result:
             return True
         else:
@@ -60,7 +61,10 @@ class Util:
             return False
 
     def launchPG(self):
-        osCommand('adb shell am start -n com.roidapp.photogrid/.MainPage')
+        osCommand('adb shell am start -n '+ self.pkg +'/.MainPage')
+
+    def closePG(self):
+        osCommand('adb shell am force-stop '+ self.pkg)
 
     def isEleClickable(self, rid):
         try:

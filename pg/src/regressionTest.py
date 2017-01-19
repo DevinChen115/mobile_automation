@@ -6,6 +6,7 @@ from appium import webdriver
 import sys
 sys.path.append(os.path.abspath(os.pardir)+"/lib")
 sys.path.append(os.path.abspath(os.pardir)+"/res")
+import module
 import util as ul
 import HTMLTestRunner
 import PG_element as el
@@ -29,7 +30,7 @@ def checkFolder():
 Result = ul.getDeviceStatus()
 
 
-class regression_test(unittest.TestCase):
+class NeedClearData_test(unittest.TestCase):
 
     def setUp(self):
         desired_caps = {}
@@ -40,7 +41,8 @@ class regression_test(unittest.TestCase):
         desired_caps['appActivity'] = el.Package['appActivity']
 
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-        self.pgutil = ul.Util(self.driver, parentFolder + "/screenshots")
+        self.pgutil = ul.Util(self.driver, parentFolder + "/screenshots/" + str(time.strftime("%Y%m%d")))
+        self.pgmodule = module.Module(self.driver, parentFolder + "/screenshots/" + str(time.strftime("%Y%m%d")))
 
     def tearDown(self):
         self.driver.quit()
@@ -94,10 +96,40 @@ class regression_test(unittest.TestCase):
             self.pgutil.screenshot("test_PG_002_SecondTimeLaunchNeedHaveGuide")
             self.assertTrue(False)
 
+class Normal_test(unittest.TestCase):
+
+    def setUp(self):
+        desired_caps = {}
+        desired_caps['platformName'] = 'Android'
+        desired_caps['platformVersion'] = Result["Androidversion"]
+        desired_caps['deviceName'] = Result["SerialNo"]
+        desired_caps['appPackage'] = el.Package['appPackage']
+        desired_caps['appActivity'] = el.Package['appActivity']
+
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+        self.pgutil = ul.Util(self.driver, parentFolder + "/screenshots/" + str(time.strftime("%Y%m%d")))
+        self.pgmodule = module.Module(self.driver, parentFolder + "/screenshots/" + str(time.strftime("%Y%m%d")))
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_PG_005_LoginByEmail(self):
+        try:
+            nickName = self.pgmodule.loginByEmail()
+            self.assertEqual(nickName.text, "")
+        except:
+            self.pgutil.screenshot("test_PG_005_LoginByEmail")
+            self.assertTrue(False)
 
 if __name__ == '__main__':
     checkFolder()
-    suite = unittest.TestLoader().loadTestsFromTestCase(regression_test)
+
+    loader = unittest.TestLoader()
+    suite = unittest.TestSuite((
+                                #loader.loadTestsFromTestCase(NeedClearData_test),
+                                loader.loadTestsFromTestCase(Normal_test)
+                                ))
+
     # unittest.TextTestRunner(verbosity=2).run(suite)
     file = open(str(PATH(parentFolder+'/result/' + str(time.strftime("%Y%m%d") + '.html'))), "wb")
     
@@ -106,5 +138,6 @@ if __name__ == '__main__':
         title="[PG Automation] [Python+Appium] [Device: " + ' ' + Result["Manufacturer"] + ' ' + Result["Model"] + ' ' + Result["Brand"] + ']',
         description="[Platform Version: " + Result["Androidversion"] + ']' + "[SDK version: " + Result["SDKversion"] + ']' + "[Device S/N: " + Result["SerialNo"] + ']')
     runner.run(suite)
+    # runner.run(suite_Normal)
     
     file.close()

@@ -156,7 +156,7 @@ class Util:
             raise
 
     def screenshot(self, name):
-        screenshot_name = str(time.strftime("%H%M%S")) + "_" + name + ".png"
+        screenshot_name = str(time.strftime("%Y%m%d%H%M%S")) + "_" + name + ".png"
         self.log("Taking screenshot: " + self.screenshot_dir + "/" + screenshot_name)
         # on Android, switching context to NATIVE_APP for screenshot
         # taking to get screenshots also stored to Testdroid Cloud

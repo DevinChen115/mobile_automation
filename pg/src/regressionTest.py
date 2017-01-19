@@ -22,7 +22,7 @@ def PATH(p):
 
 
 def checkFolder():
-        if not os.path.exists( parentFolder + "/result"):
+        if not os.path.exists(parentFolder + "/result"):
             os.makedirs(parentFolder + "/result")
 
 
@@ -74,27 +74,28 @@ class NeedClearData_test(unittest.TestCase):
                     raise
 
                 # press back key then verify overlayout still display
-                self.driver.press_keycode(4); #Back Key
+                self.driver.press_keycode(4)  # Back Key
                 isHaveWording = self.pgutil.isEleClickable(el.AllTool['wording'])
                 isHaveArrow = self.pgutil.isEleClickable(el.AllTool['arrow_down'])
                 if((isHaveWording) and (isHaveArrow)):
-                    self.assertTrue(True,"點擊 Back key 後蒙層不應該不見")
+                    self.assertTrue(True, "點擊 Back key 後蒙層不應該不見")
 
                 # tap + then verify overlayout undisplay
-                self.pgutil.waitUntilAndGetElement("id",el.AllTool['tool'],"點擊+號").click()
-                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['tools_content']),"蒙層消失, 出現工具集")
+                self.pgutil.waitUntilAndGetElement("id", el.AllTool['tool'], "點擊+號").click()
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['tools_content']), "蒙層消失, 出現工具集")
 
                 # verify 拼接 and Twinkle and Camera
-                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['multi']),"工具集裡有拼接")
-                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['twinkle']),"工具集裡有Twinkle")
-                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['camera']),"工具集最近照片裡有相機")
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['multi']), "工具集裡有拼接")
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['twinkle']), "工具集裡有Twinkle")
+                self.assertTrue(self.pgutil.isEleClickable(el.AllTool['camera']), "工具集最近照片裡有相機")
 
                 # Tap x then verify tools layout undisplay
-                self.pgutil.waitUntilAndGetElement("id",el.AllTool['close'],"點擊 X ").click()
-                self.assertFalse(self.pgutil.isEleClickable(el.AllTool['tools_content']),"工具集取消")
+                self.pgutil.waitUntilAndGetElement("id", el.AllTool['close'], "點擊 X ").click()
+                self.assertFalse(self.pgutil.isEleClickable(el.AllTool['tools_content']), "工具集取消")
         except:
             self.pgutil.screenshot("test_PG_002_SecondTimeLaunchNeedHaveGuide")
             self.assertTrue(False)
+
 
 class Normal_test(unittest.TestCase):
 
@@ -116,28 +117,29 @@ class Normal_test(unittest.TestCase):
     def test_PG_005_LoginByEmail(self):
         try:
             nickName = self.pgmodule.loginByEmail()
-            self.assertEqual(nickName.text, "")
+            self.assertNotEqual(nickName.text, "")
         except:
             self.pgutil.screenshot("test_PG_005_LoginByEmail")
             self.assertTrue(False)
+
 
 if __name__ == '__main__':
     checkFolder()
 
     loader = unittest.TestLoader()
     suite = unittest.TestSuite((
-                                #loader.loadTestsFromTestCase(NeedClearData_test),
+                                loader.loadTestsFromTestCase(NeedClearData_test),
                                 loader.loadTestsFromTestCase(Normal_test)
                                 ))
 
     # unittest.TextTestRunner(verbosity=2).run(suite)
-    file = open(str(PATH(parentFolder+'/result/' + str(time.strftime("%Y%m%d") + '.html'))), "wb")
-    
+    file = open(str(PATH(parentFolder + '/result/' + str(time.strftime("%Y%m%d") + '.html'))), "wb")
+
     runner = HTMLTestRunner.HTMLTestRunner(
         stream=file,
         title="[PG Automation] [Python+Appium] [Device: " + ' ' + Result["Manufacturer"] + ' ' + Result["Model"] + ' ' + Result["Brand"] + ']',
         description="[Platform Version: " + Result["Androidversion"] + ']' + "[SDK version: " + Result["SDKversion"] + ']' + "[Device S/N: " + Result["SerialNo"] + ']')
     runner.run(suite)
     # runner.run(suite_Normal)
-    
+
     file.close()

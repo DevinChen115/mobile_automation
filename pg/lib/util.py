@@ -90,9 +90,12 @@ class Util:
             print("Check element " + str(rid) + " visible fail.")
             return False
 
-    def clickEle(self, rid):
+    def clickEle(self, type, rid):
         try:
-            self.driver.find_element_by_id(rid).click()
+            if(type == 'id'):
+                self.driver.find_element_by_id(rid).click()
+            if(type == 'text'):
+                self.driver.find_element_by_name(rid).click()
         except TimeoutException:
             print("Click element " + str(rid) + " Error.")
 

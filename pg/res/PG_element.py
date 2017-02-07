@@ -49,13 +49,10 @@ ProfilePageAfterLogin['myPhoto'] = pkg + ':id/my_photo'
 ProfilePageAfterLogin['postNum'] = pkg + ':id/post_num'
 ProfilePageAfterLogin['followingNum'] = pkg + ':id/following_num'
 ProfilePageAfterLogin['followerNum'] = pkg + ':id/follower_num'
-
+ProfilePageAfterLogin['setting'] = pkg + ':id/profile_setting'
 
 # Email Login Page
 emailLoginPage = {}
 emailLoginPage['account'] = pkg + ':id/email_edit_text'
 emailLoginPage['pwd'] = pkg + ':id/password_edit_text'
 emailLoginPage['submit'] = pkg + ':id/login_btn'
-
-
-

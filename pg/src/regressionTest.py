@@ -47,7 +47,7 @@ class NeedClearData_test(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-
+    """
     def test_PG_001_FirstTimeLaunchNeedHaveLoginPage(self):
         try:
             if(self.pgutil.clearDate()):
@@ -96,6 +96,7 @@ class NeedClearData_test(unittest.TestCase):
         except:
             self.pgutil.screenshot("test_PG_002_SecondTimeLaunchNeedHaveGuide")
             self.assertTrue(False)
+"""
 
 
 class Normal_test(unittest.TestCase):
@@ -115,6 +116,7 @@ class Normal_test(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+    """
     def test_PG_005_LoginByEmail(self):
         try:
             nickName = self.pgmodule.loginByEmail()
@@ -124,7 +126,6 @@ class Normal_test(unittest.TestCase):
             self.assertTrue(False)
 
     def test_PG_007_CheckCanLogout(self):
-        time.sleep(1)
         try:
             if(self.pgmodule.checkAccount()):
                 self.pgmodule.loginByEmail()
@@ -134,9 +135,35 @@ class Normal_test(unittest.TestCase):
             time.sleep(2)
             if(self.pgmodule.checkAccount()):
                 self.assertTrue(True)
-
         except:
             self.pgutil.screenshot("test_PG_007_CheckCanLogout")
+            self.assertTrue(False)
+    """
+
+    def test_PG_009_CheckSearchpage(self):
+        try:
+            if(self.pgmodule.checkAccount()):
+                self.pgmodule.loginByEmail()
+                self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
+            else:
+                self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
+
+            if(self.pgmodule.searchResult("user", "koichipanhtc")):
+                self.assertTrue(True)
+            else:
+                self.assertTrue(False)
+            time.sleep(3)
+
+            self.pgutil.waitUntilAndGetElement("id", el.PicPage['back'], "Back to SearchPage").click()
+            time.sleep(1)
+            self.pgutil.waitUntilAndGetElement("id", el.PicPage['back'], "Back to SearchPage").click()
+            time.sleep(3)
+            if(self.pgmodule.searchResult("hashtag", "2017")):
+                self.assertTrue(True)
+            else:
+                self.assertTrue(False)
+        except:
+            self.pgutil.screenshot("test_PG_009_CheckSearchpage")
             self.assertTrue(False)
 
 
@@ -145,8 +172,8 @@ if __name__ == '__main__':
 
     loader = unittest.TestLoader()
     suite = unittest.TestSuite((
-                    loader.loadTestsFromTestCase(NeedClearData_test),
-                    loader.loadTestsFromTestCase(Normal_test)        
+        loader.loadTestsFromTestCase(NeedClearData_test),
+        loader.loadTestsFromTestCase(Normal_test)
     ))
 
     # unittest.TextTestRunner(verbosity=2).run(suite)

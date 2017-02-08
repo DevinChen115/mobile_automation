@@ -2,7 +2,7 @@ import os
 
 pkg = os.getenv('PGPKG')
 # Package 相關
-Package={}
+Package = {}
 Package['appPackage'] = pkg
 Package['appActivity'] = pkg + '.MainPage'
 
@@ -18,14 +18,14 @@ LoginPage['Mail'] = pkg + ':id/sign_up_email'
 
 # 第二次開啟的蒙層
 AllTool = {}
-AllTool['wording'] = pkg + ':id/create_guide_text' # 蒙層文案
-AllTool['arrow_down'] = pkg + ':id/create_dialog_arrow_down' # 下拉箭頭
-AllTool['tool'] = pkg + ':id/create_guide_btn' # +號
-AllTool['tools_content'] = pkg + ':id/fast_tools_content' # 最外層
-AllTool['close'] = pkg + ':id/btn_fast_tools' # X 
+AllTool['wording'] = pkg + ':id/create_guide_text'  # 蒙層文案
+AllTool['arrow_down'] = pkg + ':id/create_dialog_arrow_down'  # 下拉箭頭
+AllTool['tool'] = pkg + ':id/create_guide_btn'  # +號
+AllTool['tools_content'] = pkg + ':id/fast_tools_content'  # 最外層
+AllTool['close'] = pkg + ':id/btn_fast_tools'  # X
 AllTool['twinkle'] = pkg + ':id/twinkle_layout'
 AllTool['multi'] = pkg + ':id/multi_layout'
-AllTool['camera'] = pkg + ':id/camera_item' # 最近照片的相機
+AllTool['camera'] = pkg + ':id/camera_item'  # 最近照片的相機
 
 # 五大頁面
 FivePage = {}
@@ -50,9 +50,23 @@ ProfilePageAfterLogin['postNum'] = pkg + ':id/post_num'
 ProfilePageAfterLogin['followingNum'] = pkg + ':id/following_num'
 ProfilePageAfterLogin['followerNum'] = pkg + ':id/follower_num'
 ProfilePageAfterLogin['setting'] = pkg + ':id/profile_setting'
+ProfilePageAfterLogin['userName'] = pkg + ':id/name'
+
 
 # Email Login Page
 emailLoginPage = {}
 emailLoginPage['account'] = pkg + ':id/email_edit_text'
 emailLoginPage['pwd'] = pkg + ':id/password_edit_text'
 emailLoginPage['submit'] = pkg + ':id/login_btn'
+
+# Home page
+HomePage = {}
+HomePage['Search'] = pkg + ':id/pg_search_icon_font_view'
+
+# Search page
+SearchPage = {}
+SearchPage['Hashtag'] = pkg + ':id/tab_hashtags'
+
+# Picture detail page
+PicPage = {}
+PicPage['back'] = pkg + ':id/backBtn'

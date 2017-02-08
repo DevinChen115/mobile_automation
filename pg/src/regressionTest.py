@@ -47,7 +47,7 @@ class NeedClearData_test(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-    """
+
     def test_PG_001_FirstTimeLaunchNeedHaveLoginPage(self):
         try:
             if(self.pgutil.clearDate()):
@@ -96,7 +96,6 @@ class NeedClearData_test(unittest.TestCase):
         except:
             self.pgutil.screenshot("test_PG_002_SecondTimeLaunchNeedHaveGuide")
             self.assertTrue(False)
-"""
 
 
 class Normal_test(unittest.TestCase):
@@ -116,7 +115,6 @@ class Normal_test(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    """
     def test_PG_005_LoginByEmail(self):
         try:
             nickName = self.pgmodule.loginByEmail()
@@ -138,7 +136,6 @@ class Normal_test(unittest.TestCase):
         except:
             self.pgutil.screenshot("test_PG_007_CheckCanLogout")
             self.assertTrue(False)
-    """
 
     def test_PG_009_CheckSearchpage(self):
         try:

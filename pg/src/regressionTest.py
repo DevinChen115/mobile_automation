@@ -10,8 +10,13 @@ sys.path.append(os.path.abspath(os.pardir) + "/res")
 
 import module
 import util as ul
-import HTMLTestRunner
 import PG_element as el
+
+pyVesion = str(sys.version_info)
+if 'major=2' in pyVesion:
+    import HTMLTestRunner_2 as HTMLTestRunner
+else:
+    import HTMLTestRunner
 
 # Returns abs path relative to this file and not cwd
 # PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))

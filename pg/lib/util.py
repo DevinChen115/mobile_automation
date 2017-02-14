@@ -35,7 +35,7 @@ def getDeviceStatus():
 
 def osCommand(cmd):
     pyVesion = str(sys.version_info)
-    if pyVesion.startswith("2"):
+    if 'major=2' in pyVesion:
         import commands
         return commands.getoutput(cmd)
     else:

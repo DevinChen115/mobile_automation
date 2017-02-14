@@ -91,11 +91,17 @@ Version in 0.7.1
 # TODO: simplify javascript using ,ore than 1 class in the class attribute?
 
 import datetime
-from io import StringIO
+from io import BytesIO as StringIO
 import sys
 import time
 import unittest
 from xml.sax import saxutils
+
+pyVesion = str(sys.version_info)
+if 'major=2' in pyVesion:
+    from io import BytesIO as StringIO
+else:
+    from io import StringIO
 
 
 # ------------------------------------------------------------------------

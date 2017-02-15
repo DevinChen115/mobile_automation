@@ -5,8 +5,8 @@ import unittest
 from appium import webdriver
 
 import sys
-sys.path.append(os.path.abspath(os.pardir) + "/lib")
-sys.path.append(os.path.abspath(os.pardir) + "/res")
+sys.path.append(os.path.dirname(os.path.normpath(sys.path[0])) + "/lib")
+sys.path.append(os.path.dirname(os.path.normpath(sys.path[0])) + "/res")
 
 import module
 import util as ul
@@ -21,7 +21,7 @@ else:
 # Returns abs path relative to this file and not cwd
 # PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
-parentFolder = os.path.abspath(os.pardir)
+parentFolder = os.path.dirname(os.path.normpath(sys.path[0]))
 
 
 def PATH(p):
@@ -169,6 +169,20 @@ class Normal_test(unittest.TestCase):
             self.pgutil.screenshot("test_PG_009_CheckSearchpage")
             self.assertTrue(False)
 
+    """def test_PG_022_CheckComment(self):
+        try:
+            if(self.pgmodule.checkAccount()):
+                self.pgmodule.loginByEmail()
+                self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
+            else:
+                self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
+
+
+
+            self.assertTrue(True)
+        except:
+            self.assertTrue(False)
+            """
 
 if __name__ == '__main__':
     checkFolder()

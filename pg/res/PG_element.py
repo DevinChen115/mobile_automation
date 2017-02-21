@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 import os
 
 pkg = os.getenv('PGPKG')
@@ -71,3 +71,20 @@ SearchPage['Hashtag'] = pkg + ':id/tab_hashtags'
 # Picture detail page
 PicPage = {}
 PicPage['back'] = pkg + ':id/backBtn'
+
+# Beauty filter popup
+BeautyFilterPopup = {}
+BeautyFilterPopup['image'] = pkg + ':id/filter_popup_img'
+BeautyFilterPopup['desc'] = pkg + ':id/filter_popup_description'
+BeautyFilterPopup['btn'] = pkg = ':id/filter_popup_btn'
+BeautyFilterPopup['close'] = pkg + ':id/iv_close'
+
+# ChargeMaster Full Screen
+CMFullScreen = {}
+CMFullScreen['close'] = pkg + ':id/if_action_bar_back'
+CMFullScreen['title'] = pkg + ':id/ss_intro_title'
+CMFullScreen['desc'] = pkg + ':id/ss_intro_description'
+CMFullScreen['animation'] = pkg + ':id/ss_animation_view'
+CMFullScreen['btn'] = pkg + ':id/ss_animation_view'
+CMFullScreen['btnText'] = pkg + ':id/ss_intro_action_btn_text'
+CMFullScreen['adText'] = pkg + ':id/ss_intro_ad_description'

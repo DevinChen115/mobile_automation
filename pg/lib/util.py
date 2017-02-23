@@ -33,6 +33,7 @@ def getDeviceStatus():
         SerialNo=getPropSerialNo)
     return Result
 
+
 def osCommand(cmd):
     pyVesion = str(sys.version_info)
     if 'major=2' in pyVesion:
@@ -53,7 +54,7 @@ class Util:
             os.makedirs(self.screenshot_dir)
 
     def clearDate(self):
-        result = osCommand('adb shell pm clear '+ self.pkg)
+        result = osCommand('adb shell pm clear ' + self.pkg)
         if 'Success' in result:
             return True
         else:
@@ -61,30 +62,30 @@ class Util:
             return False
 
     def launchPG(self):
-        osCommand('adb shell am start -n '+ self.pkg +'/.MainPage')
+        osCommand('adb shell am start -n ' + self.pkg + '/.MainPage')
 
     def closePG(self):
-        osCommand('adb shell am force-stop '+ self.pkg)
+        osCommand('adb shell am force-stop ' + self.pkg)
 
-    def isEleClickable(self, rid):
+    def isEleClickable(self, rid, timeout=3):
         try:
-            WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.ID, rid)))
+            WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable((By.ID, rid)))
             return True
         except TimeoutException:
             print("Check element " + str(rid) + " clickable fail.")
             return False
 
-    def isElePresence(self, rid):
+    def isElePresence(self, rid, timeout=3):
         try:
-            WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.ID, rid)))
+            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.ID, rid)))
             return True
         except TimeoutException:
             print("Check element " + str(rid) + " presence fail.")
             return False
 
-    def ieEleVisible(self, rid):
+    def ieEleVisible(self, rid, timeout=3):
         try:
-            WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.ID, rid)))
+            WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((By.ID, rid)))
             return True
         except TimeoutException:
             print("Check element " + str(rid) + " visible fail.")

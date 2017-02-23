@@ -123,6 +123,7 @@ class Normal_test(unittest.TestCase):
 
     def test_PG_005_LoginByEmail(self):
         try:
+            self.pgmodule.ignorePopup()
             nickName = self.pgmodule.loginByEmail()
             self.assertNotEqual(nickName.text, "")
         except:
@@ -131,6 +132,7 @@ class Normal_test(unittest.TestCase):
 
     def test_PG_007_CheckCanLogout(self):
         try:
+            self.pgmodule.ignorePopup()
             if(self.pgmodule.checkAccount()):
                 self.pgmodule.loginByEmail()
                 self.pgmodule.logoutAccount()
@@ -145,6 +147,7 @@ class Normal_test(unittest.TestCase):
 
     def test_PG_009_CheckSearchpage(self):
         try:
+            self.pgmodule.ignorePopup()
             if(self.pgmodule.checkAccount()):
                 self.pgmodule.loginByEmail()
                 self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
@@ -184,6 +187,7 @@ class Normal_test(unittest.TestCase):
             self.assertTrue(False)
             """
 
+
 if __name__ == '__main__':
     checkFolder()
 
@@ -194,6 +198,8 @@ if __name__ == '__main__':
     ))
 
     # unittest.TextTestRunner(verbosity=2).run(suite)
+
+    # for HTMLTestRunner
     file = open(str(PATH(parentFolder + '/result/' + str(time.strftime("%Y%m%d") + '.html'))), "wb")
 
     runner = HTMLTestRunner.HTMLTestRunner(

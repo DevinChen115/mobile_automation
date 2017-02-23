@@ -21,9 +21,9 @@ LoginPage['Mail'] = pkg + ':id/sign_up_email'
 AllTool = {}
 AllTool['wording'] = pkg + ':id/create_guide_text'  # 蒙層文案
 AllTool['arrow_down'] = pkg + ':id/create_dialog_arrow_down'  # 下拉箭頭
-AllTool['tool'] = pkg + ':id/create_guide_btn'  # +號
+AllTool['tool'] = pkg + ':id/create_guide_btn'  # 蒙層的 + 號
 AllTool['tools_content'] = pkg + ':id/fast_tools_content'  # 最外層
-AllTool['close'] = pkg + ':id/btn_fast_tools'  # X
+AllTool['close'] = pkg + ':id/btn_fast_tools'  # 沒有蒙層時的 X 及 + 號
 AllTool['twinkle'] = pkg + ':id/twinkle_layout'
 AllTool['multi'] = pkg + ':id/multi_layout'
 AllTool['camera'] = pkg + ':id/camera_item'  # 最近照片的相機
@@ -76,7 +76,7 @@ PicPage['back'] = pkg + ':id/backBtn'
 BeautyFilterPopup = {}
 BeautyFilterPopup['image'] = pkg + ':id/filter_popup_img'
 BeautyFilterPopup['desc'] = pkg + ':id/filter_popup_description'
-BeautyFilterPopup['btn'] = pkg = ':id/filter_popup_btn'
+BeautyFilterPopup['btn'] = pkg + ':id/filter_popup_btn'
 BeautyFilterPopup['close'] = pkg + ':id/iv_close'
 
 # ChargeMaster Full Screen
@@ -85,6 +85,6 @@ CMFullScreen['close'] = pkg + ':id/if_action_bar_back'
 CMFullScreen['title'] = pkg + ':id/ss_intro_title'
 CMFullScreen['desc'] = pkg + ':id/ss_intro_description'
 CMFullScreen['animation'] = pkg + ':id/ss_animation_view'
-CMFullScreen['btn'] = pkg + ':id/ss_animation_view'
+CMFullScreen['btn'] = pkg + ':id/ss_intro_action_btn'
 CMFullScreen['btnText'] = pkg + ':id/ss_intro_action_btn_text'
 CMFullScreen['adText'] = pkg + ':id/ss_intro_ad_description'

@@ -1,17 +1,19 @@
+# coding:utf-8
 import util
 import os
 import sys
 import time
-sys.path.append(os.path.abspath(os.pardir)+"/res")
+sys.path.append(os.path.abspath(os.pardir) + "/res")
 import PG_element as el
 
 parentFolder = os.path.abspath(os.pardir)
 
 
 class Module:
-    def __init__(self, mDevice, dir):
+    def __init__(self, mDevice, dir, checkPopup=True):
         self.driver = mDevice
         self.util = util.Util(self.driver, dir)
+        self.checkPopup = checkPopup
 
     def loginByEmail(self):
         self.util.waitUntilAndGetElement("id", el.FivePage['profile'], "Try to go profile page").click()
@@ -61,3 +63,26 @@ class Module:
         except:
             self.pgutil.screenshot("test_PG_009_SearchResult_function")
             self.assertTrue(False)
+
+    def ignorePopup(self):
+        # 將可預期的彈跳視窗關閉
+        if(self.checkPopup):
+            try:
+                self.util.waitUntilAndGetElement("id", el.LoginPage['skip'], "get skip btn and click", 0.1).click()
+            except:
+                print(time.strftime("%H:%M:%S") + ": can not get skip btn, go next")
+            try:
+                if(self.util.isEleClickable(el.AllTool['tool'])):
+                    self.util.waitUntilAndGetElement("id", el.AllTool['tool'], "get + btn and click", 0.1).click()
+                    self.util.waitUntilAndGetElement("id", el.AllTool['close'], "get x btn and click", 0.1).click()
+            except:
+                print(time.strftime("%H:%M:%S") + ": can not get + btn, go next")
+            try:
+                self.util.waitUntilAndGetElement("id", el.BeautyFilterPopup['close'], "get beauty close btn and click", 0.1).click()
+            except:
+                print(time.strftime("%H:%M:%S") + ": can not get beauty close btn, go next")
+            try:
+                self.util.waitUntilAndGetElement("id", el.CMFullScreen['close'], "get cm fullscreen close btn and click", 0.1).click()
+                self.checkPopup = False
+            except:
+                print(time.strftime("%H:%M:%S") + ": can not get cm fullscreen")

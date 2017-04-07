@@ -1,0 +1,6 @@
+*.pyc
+*.html
+*.htm
+*.apk
+.DS_Store
+pg/screenshots/

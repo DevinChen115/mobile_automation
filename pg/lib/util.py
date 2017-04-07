@@ -91,12 +91,18 @@ class Util:
             print("Check element " + str(rid) + " visible fail.")
             return False
 
-    def clickEle(self, type, rid):
+    def clickEle(self, type, rid, timeout=3):
         try:
             if(type == 'id'):
-                self.driver.find_element_by_id(rid).click()
+                # self.driver.find_element_by_id(rid).click()
+                WebDriverWait(self.driver, timeout).until(
+                    EC.visibility_of_element_located((By.ID, rid))
+                ).click()
             if(type == 'text'):
-                self.driver.find_element_by_name(rid).click()
+                # self.driver.find_element_by_name(rid).click()
+                WebDriverWait(self.driver, timeout).until(
+                    EC.visibility_of_element_located((By.Name, rid))
+                ).click()
         except TimeoutException:
             print("Click element " + str(rid) + " Error.")
 

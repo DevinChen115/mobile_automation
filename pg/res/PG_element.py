@@ -33,7 +33,8 @@ FivePage = {}
 FivePage['home'] = pkg + ':id/home_tab'
 FivePage['feature'] = pkg + ':id/feed_tab'
 FivePage['tools'] = pkg + ':id/btn_fast_tools'
-FivePage['noti'] = pkg + ':id/notify_tab'
+FivePage['noti'] = pkg + ':id/notify_tab'  # 新版本沒有
+FivePage['feed'] = pkg + ':id/feed_tab'
 FivePage['profile'] = pkg + ':id/profile_tab'
 
 # profile

@@ -123,7 +123,7 @@ class Normal_test(unittest.TestCase):
 
     def test_PG_005_LoginByEmail(self):
         try:
-            self.pgmodule.ignorePopup()
+            # self.pgmodule.ignorePopup()
             nickName = self.pgmodule.loginByEmail()
             self.assertNotEqual(nickName.text, "")
         except:
@@ -132,7 +132,7 @@ class Normal_test(unittest.TestCase):
 
     def test_PG_007_CheckCanLogout(self):
         try:
-            self.pgmodule.ignorePopup()
+            # self.pgmodule.ignorePopup()
             if(self.pgmodule.checkAccount()):
                 self.pgmodule.loginByEmail()
                 self.pgmodule.logoutAccount()
@@ -147,12 +147,12 @@ class Normal_test(unittest.TestCase):
 
     def test_PG_009_CheckSearchpage(self):
         try:
-            self.pgmodule.ignorePopup()
+            # self.pgmodule.ignorePopup()
             if(self.pgmodule.checkAccount()):
                 self.pgmodule.loginByEmail()
-                self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
+                self.pgutil.waitUntilAndGetElement("id", el.FivePage['feed'], "go to feed").click()
             else:
-                self.pgutil.waitUntilAndGetElement("id", el.FivePage['home'], "Back to home").click()
+                self.pgutil.waitUntilAndGetElement("id", el.FivePage['feed'], "go to feed").click()
 
             if(self.pgmodule.searchResult("user", "koichipanhtc")):
                 self.assertTrue(True)
@@ -193,7 +193,8 @@ if __name__ == '__main__':
 
     loader = unittest.TestLoader()
     suite = unittest.TestSuite((
-        loader.loadTestsFromTestCase(NeedClearData_test),
+        # new version does not execute this test case
+        # loader.loadTestsFromTestCase(NeedClearData_test),
         loader.loadTestsFromTestCase(Normal_test)
     ))
 
